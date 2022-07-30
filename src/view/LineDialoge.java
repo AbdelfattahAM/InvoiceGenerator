@@ -13,9 +13,10 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Ahmed
+ * @author Ahmed.Abdelfattah
  */
-public class LineDialoge extends JDialog{
+public class LineDialoge extends JDialog {
+
     private JTextField itemNameField;
     private JTextField itemCountField;
     private JTextField itemPriceField;
@@ -24,27 +25,27 @@ public class LineDialoge extends JDialog{
     private JLabel itemPriceLbl;
     private JButton okBtn;
     private JButton cancelBtn;
-    
-    public LineDialoge(Invoice frame) {
+
+    public LineDialoge(InvoiceFrame frame) {
         itemNameField = new JTextField(20);
         itemNameLbl = new JLabel("Item Name");
-        
+
         itemCountField = new JTextField(20);
         itemCountLbl = new JLabel("Item Count");
-        
+
         itemPriceField = new JTextField(20);
         itemPriceLbl = new JLabel("Item Price");
-        
+
         okBtn = new JButton("OK");
         cancelBtn = new JButton("Cancel");
-        
+
         okBtn.setActionCommand("createLineOK");
         cancelBtn.setActionCommand("createLineCancel");
-        
+
         okBtn.addActionListener(frame.getController());
         cancelBtn.addActionListener(frame.getController());
         setLayout(new GridLayout(4, 2));
-        
+
         add(itemNameLbl);
         add(itemNameField);
         add(itemCountLbl);
@@ -53,8 +54,9 @@ public class LineDialoge extends JDialog{
         add(itemPriceField);
         add(okBtn);
         add(cancelBtn);
-        
+
         pack();
+
     }
 
     public JTextField getItemNameField() {

@@ -19,23 +19,25 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import model.LTM;
+import model.Invoice;
 import model.Line;
-import view.Invoice;
+import model.InvoicesTableModel;
+import model.LinesTableModel;
 import view.InvoiceDialoge;
+import view.InvoiceFrame;
 import view.LineDialoge;
 
 /**
  *
- * @author Ahmed
+ * @author Ahmed.Abdelfattah
  */
 public class Controller implements ActionListener, ListSelectionListener {
 
-    private Invoice frame;
+    private InvoiceFrame frame;
     private InvoiceDialoge invoiceDialog;
     private LineDialoge lineDialog;
 
-    public Controller(Invoice frame) {
+    public Controller(InvoiceFrame frame) {
         this.frame = frame;
     }
 
@@ -83,10 +85,10 @@ public class Controller implements ActionListener, ListSelectionListener {
         if (selectedIndex != -1) {
             System.out.println("You have selected row: " + selectedIndex);
             Invoice currentInvoice = frame.getInvoices().get(selectedIndex);
-            frame.getInvoiceNumLabel().setText("" + currentInvoice.getNum());
-            frame.getInvoiceDateLabel().setText(currentInvoice.getDate());
-            frame.getCustomerNameLabel().setText(currentInvoice.getCustomer());
-            frame.getInvoiceTotalLabel().setText("" + currentInvoice.getInvoiceTotal());
+            frame.getjLabel1().setText("" + currentInvoice.getNum());
+            frame.getjLabel2().setText(currentInvoice.getDate());
+            frame.getjLabel3().setText(currentInvoice.getCustomer());
+            frame.getjLabel4().setText("" + currentInvoice.getInvoiceTotal());
             LinesTableModel linesTableModel = new LinesTableModel(currentInvoice.getLines());
             frame.getLineTable().setModel(linesTableModel);
             linesTableModel.fireTableDataChanged();
@@ -102,9 +104,6 @@ public class Controller implements ActionListener, ListSelectionListener {
                 Path headerPath = Paths.get(headerFile.getAbsolutePath());
                 List<String> headerLines = Files.readAllLines(headerPath);
                 System.out.println("Invoices have been read");
-                // 1,22-11-2020,Ali
-                // 2,13-10-2021,Saleh
-                // 3,09-01-2019,Ibrahim
                 ArrayList<Invoice> invoicesArray = new ArrayList<>();
                 for (String headerLine : headerLines) {
                     try {
@@ -277,8 +276,7 @@ public class Controller implements ActionListener, ListSelectionListener {
             Invoice invoice = frame.getInvoices().get(selectedInvoice);
             Line line = new Line(item, price, count, invoice);
             invoice.getLines().add(line);
-            LTM linesTableModel = (LTM) frame.getLineTable().getModel();
-            //linesTableModel.getLines().add(line);
+            LinesTableModel linesTableModel = (LinesTableModel) frame.getLineTable().getModel();
             linesTableModel.fireTableDataChanged();
             frame.getInvoicesTableModel().fireTableDataChanged();
         }
@@ -294,4 +292,3 @@ public class Controller implements ActionListener, ListSelectionListener {
     }
 
 }
-

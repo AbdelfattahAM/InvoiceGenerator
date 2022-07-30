@@ -7,7 +7,7 @@ package model;
 
 /**
  *
- * @author Ahmed
+ * @author Ahmed.Abdelfattah
  */
 public class Line {
      private String item;
@@ -15,30 +15,14 @@ public class Line {
     private int count;
     private Invoice invoice;
 
-    public Line() {
-    }
-
     public Line(String item, double price, int count, Invoice invoice) {
         this.item = item;
         this.price = price;
         this.count = count;
         this.invoice = invoice;
     }
-
-    public Line(String item, double price, int count, view.Invoice invoice) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public double getLineTotal() {
+     public double getLineTotal() {
         return price * count;
-    }
-    
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
     }
 
     public String getItem() {
@@ -57,19 +41,25 @@ public class Line {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "Line{" + "num=" + invoice.getNum() + ", item=" + item + ", price=" + price + ", count=" + count + '}';
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public Invoice getInvoice() {
         return invoice;
     }
-    
-    public String getAsCSV() {
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
+
+     public String getAsCSV() {
         return invoice.getNum() + "," + item + "," + price + "," + count;
     }
     
-
     
 }
